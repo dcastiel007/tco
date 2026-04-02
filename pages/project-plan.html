@@ -6,46 +6,48 @@
   <title>t.Co. — תכנית עבודה</title>
   <link rel="stylesheet" href="../assets/css/tco-design.css" />
   <style>
-    .page-hero { padding: 40px 32px 32px; border-bottom: 1px solid var(--rule); }
+    .page-hero { padding: 40px 32px 32px; border-bottom: 1px solid var(--border); }
     .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 32px 0; }
-    .stat-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-lg); padding: 18px 20px; }
-    .stat-num  { font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 4px; font-family: var(--font-latin); }
-    .stat-lbl  { font-size: 10px; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+    .stat-num  { font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 4px; font-family: var(--font-latin); }
+    .stat-lbl  { font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
 
-    /* Gantt */
-    .gantt-wrap { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 40px; }
-    .gantt-head { display: grid; grid-template-columns: 200px 1fr; background: var(--navy); padding: 10px 16px; gap: 8px; align-items: center; }
-    .gantt-head-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--blue-pale); font-family: var(--font-latin); }
+    /* Gantt — force LTR so timeline flows left→right regardless of page direction */
+    .gantt-wrap  { direction: ltr; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 40px; }
+    .gantt-head  { display: grid; grid-template-columns: 200px 1fr; background: var(--card); padding: 10px 16px; gap: 8px; align-items: center; border-bottom: 1px solid var(--border); }
+    .gantt-head-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold); font-family: var(--font-latin); }
     .gantt-months { display: flex; justify-content: space-between; }
-    .gantt-month  { font-size: 10px; color: var(--blue-pale); font-family: var(--font-hebrew); }
-    .gantt-row    { display: grid; grid-template-columns: 200px 1fr; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--rule); align-items: center; }
+    .gantt-month  { font-size: 10px; color: var(--text-secondary); font-family: var(--font-latin); }
+    .gantt-row    { direction: ltr; display: grid; grid-template-columns: 200px 1fr; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--border); align-items: center; }
     .gantt-row:last-child { border-bottom: none; }
-    .gantt-row:nth-child(even) { background: var(--blue-pale); }
-    .gantt-phase  { background: var(--blue-mid) !important; padding: 7px 16px !important; }
-    .gantt-phase .g-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; font-family: var(--font-latin); }
-    .g-label { font-size: 12px; color: var(--text-dark); text-align: right; font-family: var(--font-hebrew); line-height: 1.35; }
-    .g-track { position: relative; height: 18px; background: var(--rule); border-radius: 4px; overflow: visible; }
+    .gantt-row:nth-child(even) { background: rgba(255,255,255,0.02); }
+    .gantt-phase  { background: var(--card) !important; padding: 7px 16px !important; }
+    .gantt-phase .g-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-family: var(--font-latin); text-align: left; }
+    /* label: RTL text inside LTR row — explicit right-align */
+    .g-label { direction: rtl; font-size: 12px; color: var(--text-primary); text-align: right; font-family: var(--font-hebrew); line-height: 1.35; }
+    .g-track { position: relative; height: 18px; background: var(--border); border-radius: 4px; overflow: visible; }
     .g-bar   { position: absolute; height: 100%; border-radius: 4px; top: 0; }
-    .g-today { position: absolute; top: -4px; width: 2px; height: calc(100% + 8px); background: var(--crimson); opacity: 0.9; z-index: 3; border-radius: 1px; }
+    .g-today { position: absolute; top: -4px; width: 2px; height: calc(100% + 8px); background: var(--gold); opacity: 0.8; z-index: 3; border-radius: 1px; }
 
     /* Tables */
     .task-section { margin-bottom: 36px; }
-    .phase-hdr  { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: var(--navy); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
-    .ph-num     { font-family: var(--font-mono); font-size: 10px; color: var(--crimson); letter-spacing: 0.06em; }
-    .ph-name    { font-size: 13px; font-weight: 600; color: #fff; font-family: var(--font-latin); }
-    .ph-dates   { margin-right: auto; font-family: var(--font-mono); font-size: 10px; color: var(--text-light); }
-    .ph-table   { width: 100%; border-collapse: collapse; border: 1px solid var(--rule); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); overflow: hidden; }
-    .ph-table th { background: var(--blue-pale); color: var(--text-mid); font-family: var(--font-latin); font-weight: 500; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--rule); }
-    .ph-table td { padding: 9px 12px; font-size: 12px; color: var(--text-dark); border-bottom: 1px solid var(--rule); vertical-align: middle; font-family: var(--font-hebrew); }
+    .phase-hdr  { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: var(--card); border-radius: var(--radius-lg) var(--radius-lg) 0 0; border-bottom: 1px solid var(--border); }
+    .ph-num     { font-family: var(--font-mono); font-size: 10px; color: var(--gold); letter-spacing: 0.06em; opacity: 0.7; }
+    .ph-name    { font-size: 13px; font-weight: 500; color: var(--text-primary); font-family: var(--font-latin); }
+    .ph-dates   { margin-right: auto; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+    .ph-table   { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); overflow: hidden; }
+    .ph-table th { background: var(--surface); color: var(--gold); font-family: var(--font-latin); font-weight: 500; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--border); }
+    .ph-table td { padding: 9px 12px; font-size: 12px; color: var(--text-primary); border-bottom: 1px solid var(--border); vertical-align: middle; font-family: var(--font-hebrew); }
     .ph-table tr:last-child td { border-bottom: none; }
-    .ph-table tr:hover td { background: var(--blue-pale); }
-    .t-num   { font-family: var(--font-mono); font-size: 11px; color: var(--text-light); text-align: center; width: 32px; }
-    .t-dates { font-family: var(--font-mono); font-size: 10px; color: var(--text-light); white-space: nowrap; direction: ltr; text-align: left; }
-    .t-dur   { font-family: var(--font-mono); font-size: 11px; color: var(--text-mid); text-align: center; width: 56px; }
-    .t-notes { font-size: 11px; color: var(--text-mid); max-width: 240px; line-height: 1.5; }
-    .dur-bar  { height: 3px; background: var(--rule); border-radius: 2px; margin-top: 3px; }
+    .ph-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .ph-table tr:hover td { background: var(--gold-dim); }
+    .t-num   { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-align: center; width: 32px; }
+    .t-dates { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); white-space: nowrap; direction: ltr; text-align: left; }
+    .t-dur   { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); text-align: center; width: 56px; }
+    .t-notes { font-size: 11px; color: var(--text-secondary); max-width: 240px; line-height: 1.5; }
+    .dur-bar  { height: 3px; background: var(--border); border-radius: 2px; margin-top: 3px; }
     .dur-fill { height: 100%; border-radius: 2px; }
-    .today-line { font-size: 11px; font-family: var(--font-mono); color: var(--crimson); text-align: center; margin-bottom: 6px; }
+    .today-line { font-size: 11px; font-family: var(--font-mono); color: var(--gold); text-align: center; margin-bottom: 6px; opacity: 0.8; }
 
     @media (max-width: 768px) {
       .stats-row { grid-template-columns: repeat(2,1fr); }
@@ -127,9 +129,9 @@ function setTheme(t){applyTheme(t);}
 mq.addEventListener('change',()=>{if(cur==='system')applyTheme('system');});
 applyTheme(cur);
 
-/* Colors */
-const SC={'KEY':'#C0272D','DESIGN':'#5A4FAA','DEV':'#2A9E96','IMPL':'#1A3F72','CONTENT':'#2E6AAF','QA':'#B86F0A','FIX':'#C0272D','DOCS':'#7A6FC0','PRINT':'#2A9E96','HW':'#3A5070','SUBMIT':'#C0272D','SETUP':'#5A4FAA','LIVE':'#C0272D','TEARDOWN':'#3A5070'};
-const SD={'KEY':'#F5E0E1','DESIGN':'#EEEAF8','DEV':'#E0F4F3','IMPL':'#E8F0FA','CONTENT':'#E8F0FA','QA':'#FDF3E3','FIX':'#F5E0E1','DOCS':'#EDEAF8','PRINT':'#E0F4F3','HW':'#E8F0FA','SUBMIT':'#F5E0E1','SETUP':'#EEEAF8','LIVE':'#F5E0E1','TEARDOWN':'#E8F0FA'};
+/* Colors — gold/dark palette */
+const SC={'KEY':'#C8A96E','DESIGN':'#7C6FCD','DEV':'#4ECDC4','IMPL':'#4ECDC4','CONTENT':'#C8A96E','QA':'#F8B743','FIX':'#E05A5F','DOCS':'#7C6FCD','PRINT':'#4ECDC4','HW':'#8A95AA','SUBMIT':'#C8A96E','SETUP':'#7C6FCD','LIVE':'#C8A96E','TEARDOWN':'#8A95AA'};
+const SD={'KEY':'rgba(200,169,110,0.18)','DESIGN':'rgba(124,111,205,0.15)','DEV':'rgba(78,205,196,0.15)','IMPL':'rgba(78,205,196,0.10)','CONTENT':'rgba(200,169,110,0.12)','QA':'rgba(248,183,67,0.15)','FIX':'rgba(224,90,95,0.15)','DOCS':'rgba(124,111,205,0.15)','PRINT':'rgba(78,205,196,0.12)','HW':'rgba(138,149,170,0.12)','SUBMIT':'rgba(200,169,110,0.22)','SETUP':'rgba(124,111,205,0.15)','LIVE':'rgba(200,169,110,0.20)','TEARDOWN':'rgba(138,149,170,0.12)'};
 
 /* Data */
 const phases=[
