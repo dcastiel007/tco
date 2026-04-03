@@ -1,83 +1,623 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" data-theme="system">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>t.Co. — [PAGE TITLE] — v1.0</title>
-  <link rel="stylesheet" href="../assets/css/tco-design.css" />
-  <meta name="version" content="v1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="version" content="v1.0"/>
+<title>t.Co. — Brand Identity & Design System — v1.0</title>
+<link rel="stylesheet" href="../assets/css/tco-design.css"/>
+<style>
+.ds-hero    { padding: 80px 40px 64px; border-bottom: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
+.ds-section { max-width: 1100px; margin: 0 auto; padding: 64px 40px; border-bottom: 1px solid var(--border); }
+.ds-section:last-of-type { border-bottom: none; }
+
+/* Wordmark */
+.wm { font-family: var(--font-latin); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--text-primary); }
+.wm .dot  { color: var(--gold); }
+.wm .dot2 { color: var(--gold); opacity: 0.6; }
+
+/* Logo variants */
+.logo-variants { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 14px; margin-top: 24px; }
+.logo-box { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 130px; }
+.logo-box-lbl { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-family: var(--font-latin); }
+.logo-dark  { background: #0A0A0F; }
+.logo-light { background: #FAFAF7; }
+.logo-gold  { background: var(--gold); }
+.logo-light .wm { color: #1A1814; } .logo-light .wm .dot  { color: #9A7A3E; }
+.logo-gold  .wm { color: #0A0A0F; } .logo-gold  .wm .dot  { color: rgba(0,0,0,0.5); }
+
+/* Swatches */
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; margin-top: 18px; }
+.swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+.swatch-color { height: 68px; }
+.swatch-info  { padding: 9px 11px; background: var(--card); }
+.swatch-name  { font-size: 11px; font-weight: 500; color: var(--text-primary); font-family: var(--font-latin); }
+.swatch-hex   { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px; }
+.swatch-role  { font-size: 9px; color: var(--text-muted); margin-top: 3px; font-family: var(--font-latin); }
+
+/* Type */
+.type-specimen { padding: 24px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 12px; }
+.type-meta { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-family: var(--font-latin); margin-bottom: 10px; }
+
+/* Spacing */
+.spacing-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; align-items: flex-end; }
+.sp-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.sp-bar  { background: var(--gold); opacity: 0.7; border-radius: 3px; width: 40px; }
+.sp-val  { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); }
+.sp-lbl  { font-size: 9px; color: var(--text-muted); font-family: var(--font-latin); }
+
+/* Components */
+.comp-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 10px; }
+.comp-lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); min-width: 90px; font-family: var(--font-latin); }
+
+/* Voice */
+.voice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; margin-top: 20px; }
+.voice-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
+.voice-trait { font-size: 14px; font-weight: 600; color: var(--gold); font-family: var(--font-latin); margin-bottom: 6px; }
+.voice-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-family: var(--font-latin); margin-bottom: 10px; }
+.voice-eg    { font-size: 11px; color: var(--teal); font-family: var(--font-latin); padding: 6px 8px; background: rgba(78,205,196,0.08); border-radius: 4px; margin-bottom: 4px; }
+.voice-no    { font-size: 11px; color: #E05A5F; font-family: var(--font-latin); padding: 6px 8px; background: rgba(224,90,95,0.06); border-radius: 4px; }
+
+/* Dos / Don'ts */
+.dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.do-box   { border: 1px solid rgba(78,205,196,0.35); background: rgba(78,205,196,0.05); border-radius: var(--radius-lg); padding: 18px; }
+.no-box   { border: 1px solid rgba(224,90,95,0.35);  background: rgba(224,90,95,0.05); border-radius: var(--radius-lg); padding: 18px; }
+.do-lbl   { font-size: 10px; font-weight: 600; color: var(--teal); font-family: var(--font-latin); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.no-lbl   { font-size: 10px; font-weight: 600; color: #E05A5F; font-family: var(--font-latin); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.rule-it  { font-size: 12px; color: var(--text-secondary); font-family: var(--font-latin); padding: 5px 0; border-bottom: 1px solid var(--border); }
+.rule-it:last-child { border-bottom: none; }
+
+/* Motion */
+.motion-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 22px; cursor: pointer; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; font-size: 12px; color: var(--text-secondary); font-family: var(--font-latin); }
+.motion-box:hover { border-color: var(--gold); background: var(--gold-dim); transform: translateY(-2px); color: var(--gold); }
+
+/* Lang toggle */
+.lang-toggle { display:flex; gap:2px; margin-right:8px; border-right:1px solid var(--border); padding-right:10px; }
+.lang-btn { padding:4px 11px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--text-secondary); font-family:var(--font-latin); font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s; }
+.lang-btn:hover { border-color:var(--gold); color:var(--gold); }
+.lang-btn.active { background:var(--gold); border-color:var(--gold); color:#0A0A0F; }
+
+/* Table scale rows */
+.trow { display:flex; align-items:baseline; gap:16px; padding:12px 20px; border-bottom:1px solid var(--border); }
+.trow:last-child { border-bottom:none; }
+.trow-sz { font-size:10px; color:var(--text-muted); font-family:var(--font-mono); min-width:70px; }
+.trow-lb { font-size:10px; color:var(--gold); font-family:var(--font-latin); min-width:70px; }
+.trow-wt { font-size:10px; color:var(--text-muted); font-family:var(--font-latin); min-width:130px; }
+
+@media (max-width: 768px) {
+  .ds-hero,.ds-section { padding: 40px 20px; }
+  .dd-grid { grid-template-columns: 1fr; }
+  .logo-variants { grid-template-columns: 1fr 1fr; }
+  .trow { flex-direction:column; gap:4px; }
+  .trow-sz,.trow-lb,.trow-wt { min-width:unset; }
+}
+</style>
 </head>
 <body>
 
-  <!-- Theme bar -->
-    <div class="theme-bar">
-    <span class="theme-bar__label"><span data-he="ערכת נושא" data-en="Theme">ערכת נושא</span></span>
-    <button class="theme-btn" onclick="setTheme('light')"  id="btn-light">☀ <span data-he="בהיר" data-en="Light">בהיר</span></button>
-    <button class="theme-btn" onclick="setTheme('system')" id="btn-system">⊙ <span data-he="מערכת" data-en="System">מערכת</span></button>
-    <button class="theme-btn" onclick="setTheme('dark')"   id="btn-dark">● <span data-he="כהה" data-en="Dark">כהה</span></button>
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-he" onclick="setLang('he')">עב</button>
-      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-    </div>
+<div class="theme-bar">
+  <span class="theme-bar__label">Theme</span>
+  <button class="theme-btn" onclick="setTheme('light')"  id="btn-light">☀ Light</button>
+  <button class="theme-btn" onclick="setTheme('system')" id="btn-system">⊙ System</button>
+  <button class="theme-btn active" onclick="setTheme('dark')" id="btn-dark">● Dark</button>
+  <div class="lang-toggle">
+    <button class="lang-btn" id="btn-he" onclick="setLang('he')">עב</button>
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
+</div>
 
-  <!-- Header -->
-  <header class="site-header">
+<header class="site-header">
   <div>
     <div class="site-logo">t.Co.</div>
-    <div class="site-tagline" data-he="קונסיירז׳ נסיעות AI אישי" data-en="Personal AI Travel Concierge">קונסיירז׳ נסיעות AI אישי</div>
+    <div class="site-tagline" data-he="זהות מותג ומדריך עיצוב" data-en="Brand Identity & Design System">Brand Identity & Design System</div>
   </div>
   <nav>
     <ul class="site-nav">
-      <li><a href="../index.html" data-he="בית" data-en="Home">בית</a></li>
-      <li><a href="project-plan.html" data-he="תכנית הפרויקט" data-en="Project Plan">תכנית הפרויקט</a></li>
-      <li><a href="agents.html" data-he="ארכיטקטורה" data-en="Architecture">ארכיטקטורה</a></li>
-      <li><a href="ux-flows.html" data-he="UX Flows" data-en="UX Flows">UX Flows</a></li>
+      <li><a href="../index.html"       data-he="בית"          data-en="Home">Home</a></li>
+      <li><a href="project-plan.html"   data-he="תכנית"        data-en="Plan">Plan</a></li>
+      <li><a href="agents.html"         data-he="ארכיטקטורה"  data-en="Architecture">Architecture</a></li>
+      <li><a href="ux-flows.html"       data-he="UX Flows"     data-en="UX Flows">UX Flows</a></li>
       <li><a href="design-system.html" class="active" data-he="Design System" data-en="Design System">Design System</a></li>
-      <li><a href="exhibition.html" data-he="תערוכה" data-en="Exhibition">תערוכה</a></li>
+      <li><a href="exhibition.html"     data-he="תערוכה"       data-en="Exhibition">Exhibition</a></li>
     </ul>
   </nav>
 </header>
 
-  <!-- Page content -->
-  <main>
-    <section class="section">
-      <div class="container">
+<!-- HERO -->
+<div class="ds-hero">
+  <p class="section-label">Brand Identity & Design System · v1.0 · Draft</p>
+  <h1 data-he="זהות מותג ומדריך עיצוב" data-en="Brand Identity & Design System">Brand Identity & Design System</h1>
+  <p style="color:var(--text-secondary);margin-top:10px;max-width:680px;font-family:var(--font-latin)">The single source of truth for all visual and verbal decisions across t.Co. — product, website, and academic documentation.</p>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;font-size:12px;font-family:var(--font-latin)">
+    <span style="color:var(--text-muted)">Status: <span style="color:var(--gold);font-weight:500">Draft v1.0</span></span>
+    <span style="color:var(--text-muted)">Date: <span style="color:var(--text-secondary)">April 2026</span></span>
+    <span style="color:var(--text-muted)">Author: <span style="color:var(--text-secondary)">David Castiel</span></span>
+    <span style="color:var(--text-muted)">HIT M.Design 2026</span>
+  </div>
+  <!-- Mini TOC -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:24px">
+    <a href="#overview"    style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">01 Overview</a>
+    <a href="#logo"        style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">02 Logo</a>
+    <a href="#colors"      style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">03 Colors</a>
+    <a href="#typography"  style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">04 Typography</a>
+    <a href="#spacing"     style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">05 Spacing</a>
+    <a href="#components"  style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">06 Components</a>
+    <a href="#voice"       style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">07 Brand Voice</a>
+    <a href="#motion"      style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">08 Motion</a>
+    <a href="#icons"       style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">09 Iconography</a>
+    <a href="#reference"   style="font-size:11px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);text-decoration:none;font-family:var(--font-latin)">10 Quick Ref</a>
+  </div>
+</div>
 
-        <p class="section-label">SECTION LABEL</p>
-        <h1>כותרת הדף</h1>
-        <hr class="rule-blue" />
+<!-- 01 OVERVIEW -->
+<div class="ds-section" id="overview">
+  <p class="section-label">01</p>
+  <h2>Brand Overview</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">t.Co. is a refined, intelligent AI travel companion — built to feel modern, human, and quietly powerful. The brand sits at the intersection of luxury travel and accessible technology.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:24px">
+    <div class="card"><div class="section-label" style="margin-bottom:8px">Mission</div><p style="font-size:13px;color:var(--text-secondary);line-height:1.65;font-family:var(--font-latin)">To make every journey feel effortlessly personal — as if you have a brilliant, well-traveled friend planning every detail on your behalf.</p></div>
+    <div class="card"><div class="section-label" style="margin-bottom:8px">Positioning</div><p style="font-size:13px;color:var(--text-secondary);line-height:1.65;font-family:var(--font-latin)">Not a travel app. Not a chatbot. A lifelong travel companion that gets smarter with every trip — hyper-personalized, always available, quietly intelligent.</p></div>
+    <div class="card"><div class="section-label" style="margin-bottom:8px">Aesthetic</div><p style="font-size:13px;color:var(--text-secondary);line-height:1.65;font-family:var(--font-latin)">Contemporary minimal — generous whitespace, light typography, precise geometry, no decorative excess. Dark, elegant, gold-accented, with quiet confidence.</p></div>
+    <div class="card"><div class="section-label" style="margin-bottom:8px">Audience</div><p style="font-size:13px;color:var(--text-secondary);line-height:1.65;font-family:var(--font-latin)">Experience seekers, adventure travelers, and business travelers who value quality, efficiency, and authentic experiences over generic tourism.</p></div>
+  </div>
+</div>
 
-        <!-- Content here -->
+<!-- 02 LOGO -->
+<div class="ds-section" id="logo">
+  <p class="section-label">02</p>
+  <h2>Logo & Wordmark</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">The t.Co. wordmark is the primary brand asset. Poppins Bold with deliberate punctuation — lowercase 't', first period, uppercase 'C', trailing period. Each character carries meaning: personal, precise, tech-forward.</p>
 
+  <!-- Mark + Wordmark anatomy -->
+  <div style="margin-top:24px;padding:40px 32px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+
+      <!-- Globe mark anatomy -->
+      <div style="text-align:center">
+        <p style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-family:var(--font-latin);margin-bottom:16px">Globe Mark — Anatomy</p>
+        <svg viewBox="0 0 200 200" style="width:160px;height:160px;display:block;margin:0 auto">
+          <circle cx="100" cy="100" r="60" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+          <ellipse cx="100" cy="100" rx="60" ry="20" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+          <ellipse cx="100" cy="74" rx="50" ry="13" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.35"/>
+          <ellipse cx="100" cy="126" rx="50" ry="13" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.35"/>
+          <path d="M100,40 Q120,100 100,160" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+          <path d="M100,40 Q80,100 100,160" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+          <circle cx="100" cy="100" r="7" fill="var(--gold)"/>
+          <circle cx="100" cy="100" r="3.5" fill="var(--bg)"/>
+          <!-- Annotation lines -->
+          <line x1="160" y1="100" x2="185" y2="68" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="3,2" opacity="0.5"/>
+          <text x="188" y="66" font-family="Poppins,sans-serif" font-size="8" fill="var(--text-muted)" font-weight="400">Outer ring</text>
+          <line x1="146" y1="80" x2="185" y2="55" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="3,2" opacity="0.4"/>
+          <text x="188" y="53" font-family="Poppins,sans-serif" font-size="8" fill="var(--text-muted)" font-weight="400">Latitude arc</text>
+          <line x1="107" y1="100" x2="185" y2="100" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="3,2" opacity="0.5"/>
+          <text x="188" y="104" font-family="Poppins,sans-serif" font-size="8" fill="var(--gold)" font-weight="400">Gold center</text>
+        </svg>
+        <p style="font-size:10px;color:var(--text-muted);font-family:var(--font-latin);margin-top:12px">3 latitude ellipses · 2 meridian arcs · 1 center dot</p>
       </div>
-    </section>
-  </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="site-footer__left" dir="rtl">
-      דוד קסטיאל · תואר שני בעיצוב לסביבה טכנולוגית<br>
-      מכון טכנולוגי חולון HIT · הגשה: 4 אוגוסט 2026
+      <!-- Wordmark anatomy -->
+      <div>
+        <p style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-family:var(--font-latin);margin-bottom:16px">Wordmark — Anatomy</p>
+        <div class="wm" style="font-size:64px;margin-bottom:16px">t<span class="dot">.</span>Co<span class="dot2">.</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+            <span style="font-size:10px;color:var(--text-muted);font-family:var(--font-latin)">Typeface</span>
+            <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-latin)">Poppins Bold 700</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+            <span style="font-size:10px;color:var(--text-muted);font-family:var(--font-latin)">Letter-spacing</span>
+            <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">−0.04em</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+            <span style="font-size:10px;color:var(--text-muted);font-family:var(--font-latin)">Dot color</span>
+            <span style="font-size:11px;color:var(--gold);font-family:var(--font-mono)">#C8A96E</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0">
+            <span style="font-size:10px;color:var(--text-muted);font-family:var(--font-latin)">Always written</span>
+            <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-latin)">t.Co. — with both periods</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="site-footer__right">t.Co. · v1.0 · 2026</div>
-  </footer>
 
-  <script>
-    const root = document.documentElement;
-    const mq   = window.matchMedia('(prefers-color-scheme: dark)');
-    let current = localStorage.getItem('tco-theme') || 'system';
-    function applyTheme(t) {
-      root.setAttribute('data-theme', t);
-      ['light','system','dark'].forEach(x =>
-        document.getElementById('btn-' + x).classList.toggle('active', x === t)
-      );
-      current = t;
-      localStorage.setItem('tco-theme', t);
-    }
-    function setTheme(t) { applyTheme(t); }
-    mq.addEventListener('change', () => { if (current === 'system') applyTheme('system'); });
-    applyTheme(current);
-  </script>
+    <!-- Full horizontal lockup -->
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border)">
+      <p style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-family:var(--font-latin);margin-bottom:16px">Horizontal Lockup — Mark + Wordmark</p>
+      <div style="display:flex;align-items:center;gap:20px">
+        <svg viewBox="0 0 60 60" style="width:52px;height:52px;flex-shrink:0">
+          <circle cx="30" cy="30" r="27" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+          <ellipse cx="30" cy="30" rx="27" ry="9" fill="none" stroke="var(--gold)" stroke-width="0.9" opacity="0.5"/>
+          <ellipse cx="30" cy="19" rx="22" ry="5.5" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.35"/>
+          <ellipse cx="30" cy="41" rx="22" ry="5.5" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.35"/>
+          <path d="M30,3 Q39,30 30,57" fill="none" stroke="var(--gold)" stroke-width="0.9" opacity="0.5"/>
+          <path d="M30,3 Q21,30 30,57" fill="none" stroke="var(--gold)" stroke-width="0.9" opacity="0.5"/>
+          <circle cx="30" cy="30" r="4.5" fill="var(--gold)"/>
+          <circle cx="30" cy="30" r="2.2" fill="var(--bg)"/>
+        </svg>
+        <div>
+          <div class="wm" style="font-size:28px;line-height:1">t<span class="dot">.</span>Co<span class="dot2">.</span></div>
+          <div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);font-family:var(--font-latin);margin-top:3px">Personal AI Travel Concierge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variants -->
+  <h3 style="margin-top:28px">Approved Variants</h3>
+  <div class="logo-variants">
+    <div class="logo-box logo-dark"><div class="wm" style="font-size:34px">t<span class="dot">.</span>Co<span class="dot2">.</span></div><div class="logo-box-lbl">Dark — primary</div></div>
+    <div class="logo-box logo-light"><div class="wm" style="font-size:34px">t<span class="dot">.</span>Co<span class="dot2">.</span></div><div class="logo-box-lbl" style="color:#6B6560">Light background</div></div>
+    <div class="logo-box logo-gold"><div class="wm" style="font-size:34px">t<span class="dot">.</span>Co<span class="dot2">.</span></div><div class="logo-box-lbl" style="color:rgba(0,0,0,0.5)">Gold background</div></div>
+    <div class="logo-box" style="background:var(--card)"><div class="wm" style="font-size:20px">t<span class="dot">.</span>Co<span class="dot2">.</span></div><div style="font-size:11px;color:var(--text-muted);font-family:var(--font-latin)">Personal AI Travel Concierge</div><div class="logo-box-lbl">With tagline</div></div>
+  </div>
+
+  <!-- Clearspace -->
+  <h3 style="margin-top:28px">Clear Space — Minimum X Unit</h3>
+  <p style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin);margin-top:6px">Maintain clear space equal to the cap-height of the 't' character on all four sides.</p>
+  <div style="margin-top:14px;display:inline-block;border:1px dashed rgba(200,169,110,0.4);padding:28px;border-radius:4px">
+    <div class="wm" style="font-size:40px">t<span class="dot">.</span>Co<span class="dot2">.</span></div>
+  </div>
+
+  <!-- Don'ts -->
+  <h3 style="margin-top:28px">Logo Rules</h3>
+  <div class="dd-grid">
+    <div class="do-box">
+      <div class="do-lbl">✓ Always</div>
+      <div class="rule-it">Write as <strong>t.Co.</strong> — lowercase t, uppercase C, both periods</div>
+      <div class="rule-it">Bold the name in running prose: <strong>t.Co.</strong></div>
+      <div class="rule-it">Use full name on first mention: t.Co. Personal AI Travel Concierge</div>
+      <div class="rule-it">Ensure sufficient contrast against all backgrounds</div>
+      <div class="rule-it">Maintain clear space on all sides</div>
+    </div>
+    <div class="no-box">
+      <div class="no-lbl">✗ Never</div>
+      <div class="rule-it">Write as TCO, Tco, t.co, T.CO, or TICO</div>
+      <div class="rule-it">Change the dot color or make both dots the same opacity</div>
+      <div class="rule-it">Use weights other than Bold 700</div>
+      <div class="rule-it">Stretch, rotate, outline, or add shadow effects</div>
+      <div class="rule-it">Place on busy or low-contrast backgrounds</div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 COLORS -->
+<div class="ds-section" id="colors">
+  <p class="section-label">03</p>
+  <h2>Color Palette</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">Anchored in deep navy-blacks with a warm gold accent — evoking luxury travel, twilight skies, and refined intelligence. Teal and purple provide interactive and status signals.</p>
+
+  <h3 style="margin-top:24px">Dark Mode — Default</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#0A0A0F"></div><div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-hex">#0A0A0F</div><div class="swatch-role">Page bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#13131A"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#13131A</div><div class="swatch-role">Header, footer</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1C2230"></div><div class="swatch-info"><div class="swatch-name">Card</div><div class="swatch-hex">#1C2230</div><div class="swatch-role">Elevated surfaces</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2A3245"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#2A3245</div><div class="swatch-role">All borders</div></div></div>
+  </div>
+
+  <h3 style="margin-top:22px">Accent Colors</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#C8A96E"></div><div class="swatch-info"><div class="swatch-name">Gold</div><div class="swatch-hex">#C8A96E</div><div class="swatch-role">Logo, CTA, labels</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(200,169,110,0.12)"></div><div class="swatch-info"><div class="swatch-name">Gold Dim</div><div class="swatch-hex">rgba(200,169,110,.12)</div><div class="swatch-role">Hover bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#4ECDC4"></div><div class="swatch-info"><div class="swatch-name">Teal</div><div class="swatch-hex">#4ECDC4</div><div class="swatch-role">Interactive, AI</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#7C6FCD"></div><div class="swatch-info"><div class="swatch-name">Purple</div><div class="swatch-hex">#7C6FCD</div><div class="swatch-role">Design status</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F8B743"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#F8B743</div><div class="swatch-role">QA, warnings</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#E05A5F"></div><div class="swatch-info"><div class="swatch-name">Red</div><div class="swatch-hex">#E05A5F</div><div class="swatch-role">Errors only</div></div></div>
+  </div>
+
+  <h3 style="margin-top:22px">Text</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#F0EDE8"></div><div class="swatch-info"><div class="swatch-name">Primary</div><div class="swatch-hex">#F0EDE8</div><div class="swatch-role">Headings, main</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8A95AA"></div><div class="swatch-info"><div class="swatch-name">Secondary</div><div class="swatch-hex">#8A95AA</div><div class="swatch-role">Body, desc</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#4A5568"></div><div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#4A5568</div><div class="swatch-role">Meta, captions</div></div></div>
+  </div>
+
+  <h3 style="margin-top:22px">Light Mode Overrides</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#FAFAF7;border:1px solid #E2DDD4"></div><div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-hex">#FAFAF7</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border:1px solid #E2DDD4"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#FFFFFF</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F4F1EB;border:1px solid #E2DDD4"></div><div class="swatch-info"><div class="swatch-name">Card</div><div class="swatch-hex">#F4F1EB</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#9A7A3E"></div><div class="swatch-info"><div class="swatch-name">Gold (light)</div><div class="swatch-hex">#9A7A3E</div><div class="swatch-role">Darkened for contrast</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1A1814"></div><div class="swatch-info"><div class="swatch-name">Text Primary</div><div class="swatch-hex">#1A1814</div></div></div>
+  </div>
+
+  <h3 style="margin-top:22px">Color Rules</h3>
+  <div class="dd-grid">
+    <div class="do-box">
+      <div class="do-lbl">✓ Do</div>
+      <div class="rule-it">Use Gold for interactive elements, logo, and primary CTAs only</div>
+      <div class="rule-it">Use Teal for live / AI-active indicators and implemented features</div>
+      <div class="rule-it">Use Purple sparingly for design status and decorative accents</div>
+      <div class="rule-it">Maintain WCAG AA contrast (4.5:1) for all body text</div>
+      <div class="rule-it">Default to dark mode for first-time visitors</div>
+    </div>
+    <div class="no-box">
+      <div class="no-lbl">✗ Don't</div>
+      <div class="rule-it">Use pure #000000 or #FFFFFF as dominant surfaces</div>
+      <div class="rule-it">Use more than 3 accent colors in one composition</div>
+      <div class="rule-it">Use gradients with more than 2 stops</div>
+      <div class="rule-it">Use drop shadows — use border + background contrast instead</div>
+      <div class="rule-it">Use red for anything other than errors and critical alerts</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 TYPOGRAPHY -->
+<div class="ds-section" id="typography">
+  <p class="section-label">04</p>
+  <h2>Typography</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">Three purposeful families: Poppins for all Latin UI and headings, Noto Sans Hebrew for Hebrew content, JetBrains Mono for code and technical labels.</p>
+
+  <div class="type-specimen" style="margin-top:24px">
+    <div class="type-meta">Latin / UI — Poppins</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:34px;font-weight:700;color:var(--text-primary);letter-spacing:-0.02em;line-height:1.2">The world is yours to explore.</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-top:10px">Light 300 — body text and all supporting content in English UI.</div>
+    <div style="display:flex;gap:28px;margin-top:18px;flex-wrap:wrap">
+      <div><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">300</div><div style="font-family:'Poppins',sans-serif;font-weight:300;font-size:18px;color:var(--text-primary)">Light</div></div>
+      <div><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">400</div><div style="font-family:'Poppins',sans-serif;font-weight:400;font-size:18px;color:var(--text-primary)">Regular</div></div>
+      <div><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">500</div><div style="font-family:'Poppins',sans-serif;font-weight:500;font-size:18px;color:var(--text-primary)">Medium</div></div>
+      <div><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">700</div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;color:var(--text-primary)">Bold</div></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-meta">Hebrew — Noto Sans Hebrew</div>
+    <div style="font-family:'Noto Sans Hebrew',sans-serif;font-size:30px;font-weight:600;color:var(--text-primary);direction:rtl;text-align:right;line-height:1.3">העולם מחכה לך לגלות אותו.</div>
+    <div style="font-family:'Noto Sans Hebrew',sans-serif;font-size:14px;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-top:10px;direction:rtl;text-align:right">Light 300 — גוף טקסט בכל ממשק עברי.</div>
+    <div style="display:flex;gap:28px;margin-top:18px;flex-wrap:wrap;direction:rtl;justify-content:flex-end">
+      <div style="text-align:right"><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">300</div><div style="font-family:'Noto Sans Hebrew',sans-serif;font-weight:300;font-size:18px">לייט</div></div>
+      <div style="text-align:right"><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">400</div><div style="font-family:'Noto Sans Hebrew',sans-serif;font-weight:400;font-size:18px">רגיל</div></div>
+      <div style="text-align:right"><div style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">600</div><div style="font-family:'Noto Sans Hebrew',sans-serif;font-weight:600;font-size:18px">סמי-בולד</div></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-meta">Monospace — JetBrains Mono</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal);line-height:1.7">AGT-01 · v2.0 · 2026-04-03<br>{ travel_style: "solo", budget: 3000, interests: ["food","culture"] }</div>
+    <div style="font-size:12px;color:var(--text-secondary);font-family:var(--font-latin);margin-top:10px">Used for: agent IDs, version numbers, code, hex values, metadata, timestamps.</div>
+  </div>
+
+  <!-- Scale -->
+  <h3 style="margin-top:24px">Type Scale</h3>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-top:12px">
+    <div class="trow" style="background:var(--surface)">
+      <div class="trow-sz" style="color:var(--gold)">Size</div>
+      <div class="trow-lb" style="color:var(--gold)">Role</div>
+      <div class="trow-wt" style="color:var(--gold)">Weight / Style</div>
+      <div style="flex:1;font-size:10px;color:var(--gold);font-family:var(--font-latin)">Specimen</div>
+    </div>
+    <div class="trow"><div class="trow-sz">32–42px</div><div class="trow-lb">Display</div><div class="trow-wt">Bold 700 / −0.02em</div><div style="flex:1;font-family:'Poppins',sans-serif;font-size:32px;font-weight:700;color:var(--text-primary);letter-spacing:-0.02em;line-height:1">t.Co.</div></div>
+    <div class="trow"><div class="trow-sz">24–28px</div><div class="trow-lb">H1</div><div class="trow-wt">SemiBold 600 / −0.01em</div><div style="flex:1;font-family:'Poppins',sans-serif;font-size:24px;font-weight:600;color:var(--text-primary)">Travel Companion</div></div>
+    <div class="trow"><div class="trow-sz">18–20px</div><div class="trow-lb">H2</div><div class="trow-wt">Medium 500</div><div style="flex:1;font-family:'Poppins',sans-serif;font-size:18px;font-weight:500;color:var(--text-primary)">Agent Catalog</div></div>
+    <div class="trow"><div class="trow-sz">14–16px</div><div class="trow-lb">H3</div><div class="trow-wt">Medium 500 / Gold</div><div style="flex:1;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:var(--gold)">Before Trip — Planning</div></div>
+    <div class="trow"><div class="trow-sz">13–15px</div><div class="trow-lb">Body</div><div class="trow-wt">Light 300 / 1.7 lh</div><div style="flex:1;font-family:'Poppins',sans-serif;font-size:13px;font-weight:300;color:var(--text-secondary);line-height:1.7">The system builds a continuous model of the traveler's preferences.</div></div>
+    <div class="trow"><div class="trow-sz">10px</div><div class="trow-lb">Label</div><div class="trow-wt">Medium / UPPERCASE / +0.1em</div><div style="flex:1;font-family:'Poppins',sans-serif;font-size:10px;font-weight:500;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase">Architecture Document · v2.0</div></div>
+    <div class="trow" style="border-bottom:none"><div class="trow-sz">11px</div><div class="trow-lb">Mono</div><div class="trow-wt">JetBrains Mono / Teal</div><div style="flex:1;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal)">AGT-01 · #C8A96E · v1.0</div></div>
+  </div>
+</div>
+
+<!-- 05 SPACING -->
+<div class="ds-section" id="spacing">
+  <p class="section-label">05</p>
+  <h2>Spacing & Layout</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">All spacing derived from an 8px base unit. Consistent application creates visual rhythm across all layouts.</p>
+  <div class="spacing-row">
+    <div class="sp-item"><div class="sp-bar" style="height:8px"></div><div class="sp-val">8px</div><div class="sp-lbl">xs</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:12px"></div><div class="sp-val">12px</div><div class="sp-lbl">sm</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:16px"></div><div class="sp-val">16px</div><div class="sp-lbl">md</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:24px"></div><div class="sp-val">24px</div><div class="sp-lbl">lg</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:32px"></div><div class="sp-val">32px</div><div class="sp-lbl">xl</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:48px"></div><div class="sp-val">48px</div><div class="sp-lbl">2xl</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:64px"></div><div class="sp-val">64px</div><div class="sp-lbl">3xl</div></div>
+    <div class="sp-item"><div class="sp-bar" style="height:80px"></div><div class="sp-val">80px</div><div class="sp-lbl">section</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:24px">
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Max Content Width</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin)">1200px — centered with auto margins</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Section Padding</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin)">64px vertical · 40px horizontal (desktop)</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Border Radius</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin)">12px cards · 8px inputs · 20px pills</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Border Style</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin)">1px solid — never thick or decorative</div></div>
+  </div>
+</div>
+
+<!-- 06 COMPONENTS -->
+<div class="ds-section" id="components">
+  <p class="section-label">06</p>
+  <h2>UI Components</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">All components built from the same token system — consistent color, radius, and spacing throughout.</p>
+
+  <h3 style="margin-top:24px">Buttons</h3>
+  <div class="comp-row"><div class="comp-lbl">Primary</div><a class="btn btn-primary" href="#">Get Started</a><a class="btn btn-primary" href="#">תכנית הפרויקט</a></div>
+  <div class="comp-row"><div class="comp-lbl">Outline</div><a class="btn btn-outline" href="#">Architecture ↗</a><a class="btn btn-outline" href="#">ארכיטקטורה ↗</a></div>
+  <div class="comp-row"><div class="comp-lbl">Teal</div><a class="btn btn-teal" href="#">Live Demo</a></div>
+
+  <h3 style="margin-top:24px">Status Pills</h3>
+  <div class="comp-row">
+    <div class="comp-lbl">Tags</div>
+    <span class="pill pill-key">KEY</span>
+    <span class="pill pill-design">DESIGN</span>
+    <span class="pill pill-dev">DEV</span>
+    <span class="pill pill-qa">QA</span>
+    <span class="pill pill-docs">DOCS</span>
+    <span class="pill pill-fix">FIX</span>
+    <span class="pill pill-live">LIVE</span>
+    <span class="pill pill-submit">SUBMIT</span>
+  </div>
+
+  <h3 style="margin-top:24px">Cards</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px">
+    <div class="card"><div class="card__icon" style="background:var(--teal-dim)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="card__title">AGT-01 · Preference Profiling</div><div class="card__body">Builds a structured model of the traveler through natural conversation.</div></div>
+    <div class="card"><div class="card__icon" style="background:var(--gold-dim)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M9 20l-5-5 5-5M15 4l5 5-5 5"/></svg></div><div class="card__title">AGT-02 · Itinerary Creation</div><div class="card__body">Generates day-by-day plans optimized for the user's profile and budget.</div></div>
+    <div class="card"><div class="card__icon" style="background:var(--purple-dim)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="card__title">AGT-06 · Language & Culture</div><div class="card__body">Real-time translation and cultural guidance.</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Table</h3>
+  <div class="tco-table-wrap" style="margin-top:12px">
+    <table class="tco-table">
+      <thead><tr><th>Deliverable</th><th>Type</th><th>Version</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Architecture Document</td><td><span class="pill pill-key">KEY</span></td><td style="font-family:var(--font-mono);font-size:11px;color:var(--gold)">v2.0</td><td style="color:var(--teal);font-size:12px">✓ Live</td></tr>
+        <tr><td>UX Flows & Personas</td><td><span class="pill pill-design">DESIGN</span></td><td style="font-family:var(--font-mono);font-size:11px;color:var(--gold)">v1.0</td><td style="color:var(--teal);font-size:12px">✓ Live</td></tr>
+        <tr><td>Design System</td><td><span class="pill pill-design">DESIGN</span></td><td style="font-family:var(--font-mono);font-size:11px;color:var(--gold)">v1.0</td><td style="color:var(--text-muted);font-size:12px">Draft</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 07 BRAND VOICE -->
+<div class="ds-section" id="voice">
+  <p class="section-label">07</p>
+  <h2>Brand Voice & Tone</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">t.Co. speaks like a brilliant, well-traveled friend — not a customer service bot. Warm and direct, never robotic or corporate. Knows things, shares them confidently, and respects the user's intelligence.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="voice-trait">Intelligent</div>
+      <div class="voice-desc">Offers depth and context without being asked. Never pads responses with filler.</div>
+      <div class="voice-eg">✓ "Tokyo works best in late October — crowds thin and the foliage peaks."</div>
+      <div class="voice-no">✗ "Tokyo is a wonderful city with many great options for tourists!"</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-trait">Warm</div>
+      <div class="voice-desc">Genuinely cares. Uses natural language, not jargon. Feels like a conversation, not a form.</div>
+      <div class="voice-eg">✓ "I noticed you prefer quieter spots — skip Tsukiji at opening time."</div>
+      <div class="voice-no">✗ "Based on inputted preferences, the following venues are recommended."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-trait">Confident</div>
+      <div class="voice-desc">Makes recommendations, not suggestions. Takes a clear point of view. Doesn't over-hedge.</div>
+      <div class="voice-eg">✓ "Book the 7am Shinkansen — it's worth the early start."</div>
+      <div class="voice-no">✗ "You might want to consider perhaps taking an early train if possible."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-trait">Concise</div>
+      <div class="voice-desc">Says what needs to be said and stops. No bullet points when a sentence works better.</div>
+      <div class="voice-eg">✓ "Flight delayed 40 min. I've moved your dinner reservation."</div>
+      <div class="voice-no">✗ "We have detected a schedule update. Please see the following information..."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-trait">Personal</div>
+      <div class="voice-desc">References what it knows about you. Builds on past conversations and trips. Never generic.</div>
+      <div class="voice-eg">✓ "You loved the ramen in Osaka — there's a similar spot near your hotel."</div>
+      <div class="voice-no">✗ "Here are some popular restaurants near your location."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-trait">Multilingual</div>
+      <div class="voice-desc">Switches naturally between Hebrew and English. UI labels in English. Content adapts to preference.</div>
+      <div class="voice-eg">✓ Seamless RTL support, culturally aware, no awkward mixing</div>
+      <div class="voice-no">✗ Machine-translated or mid-sentence language mixing</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Writing Rules</h3>
+  <div class="dd-grid">
+    <div class="do-box">
+      <div class="do-lbl">✓ Language Do's</div>
+      <div class="rule-it">Write the brand name as <strong>t.Co.</strong> — bold in running text</div>
+      <div class="rule-it">Use "traveler" not "user" in user-facing copy</div>
+      <div class="rule-it">Active voice — "Tico finds the route" not "the route is found"</div>
+      <div class="rule-it">Contractions are fine — "you'll", "it's", "we've"</div>
+      <div class="rule-it">First mention: full name t.Co. Personal AI Travel Concierge</div>
+    </div>
+    <div class="no-box">
+      <div class="no-lbl">✗ Language Don'ts</div>
+      <div class="rule-it">Never write TCO, tco, T.CO, t.co, or Tco</div>
+      <div class="rule-it">Avoid "AI-powered", "leverage", "seamless", "cutting-edge"</div>
+      <div class="rule-it">No exclamation marks in Tico's voice — confident, not excited</div>
+      <div class="rule-it">Don't start Tico responses with "I" — center the traveler</div>
+      <div class="rule-it">No passive voice or corporate jargon in user-facing text</div>
+    </div>
+  </div>
+</div>
+
+<!-- 08 MOTION -->
+<div class="ds-section" id="motion">
+  <p class="section-label">08</p>
+  <h2>Motion & Interaction</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">Motion in t.Co. is quiet and purposeful — confirms actions, guides attention, never distracts. All transitions use consistent duration and easing.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:24px">
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Micro (hover)</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)">150ms ease</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Standard</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)">200ms ease</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Enter / Exit</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)">300ms ease-out</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Animate only</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin)">color, opacity, border, background, transform</div></div>
+    <div class="card"><div class="section-label" style="margin-bottom:6px">Never animate</div><div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-latin)">width, height, padding, margin (causes reflow)</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Hover States — Interactive Demo</h3>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+    <div class="motion-box">Card — border + bg + translateY(−2px)</div>
+    <div class="motion-box">Button — opacity + color</div>
+    <div class="motion-box">Link — color to gold</div>
+  </div>
+</div>
+
+<!-- 09 ICONOGRAPHY -->
+<div class="ds-section" id="icons">
+  <p class="section-label">09</p>
+  <h2>Iconography</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;max-width:700px;font-family:var(--font-latin)">Lucide Icons — MIT licensed, consistent 1.5px stroke, 24×24 grid, no fill, rounded caps. Icons inherit color from context and are always monochromatic.</p>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px">
+    <!-- Icon specimens -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">User</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">Location</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">Chat</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">Calendar</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">Rating</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">Send</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span style="font-size:9px;color:var(--text-muted);font-family:var(--font-latin)">Email</span></div>
+  </div>
+
+  <div style="margin-top:16px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md)">
+    <p style="font-size:12px;color:var(--text-secondary);font-family:var(--font-latin)"><strong style="color:var(--gold)">Source:</strong> Lucide Icons (MIT) · <strong style="color:var(--gold)">Stroke:</strong> 1.5px, rounded linecap · <strong style="color:var(--gold)">Grid:</strong> 24×24 · <strong style="color:var(--gold)">Fill:</strong> none · <strong style="color:var(--gold)">Color:</strong> always from CSS variable, never hardcoded</p>
+  </div>
+</div>
+
+<!-- 10 QUICK REFERENCE -->
+<div class="ds-section" id="reference">
+  <p class="section-label">10</p>
+  <h2>Quick Reference</h2>
+  <p style="color:var(--text-secondary);margin-top:8px;font-family:var(--font-latin)">Before finalizing any output, ask: <em style="color:var(--gold)">"Does this feel like a premium travel concierge product — dark, elegant, gold-accented, with quiet confidence?"</em></p>
+
+  <div class="tco-table-wrap" style="margin-top:20px">
+    <table class="tco-table">
+      <thead><tr><th>Token / Rule</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--gold</td><td style="font-family:var(--font-mono);font-size:11px">#C8A96E</td><td style="font-size:12px;color:var(--text-secondary)">Logo, labels, CTAs, accents</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--teal</td><td style="font-family:var(--font-mono);font-size:11px">#4ECDC4</td><td style="font-size:12px;color:var(--text-secondary)">Interactive, AI indicators, implemented</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--purple</td><td style="font-family:var(--font-mono);font-size:11px">#7C6FCD</td><td style="font-size:12px;color:var(--text-secondary)">Design status, secondary</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--bg (dark)</td><td style="font-family:var(--font-mono);font-size:11px">#0A0A0F</td><td style="font-size:12px;color:var(--text-secondary)">Default page background</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--font-latin</td><td style="font-family:var(--font-mono);font-size:11px">'Poppins'</td><td style="font-size:12px;color:var(--text-secondary)">All Latin / UI / headings</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--font-hebrew</td><td style="font-family:var(--font-mono);font-size:11px">'Noto Sans Hebrew'</td><td style="font-size:12px;color:var(--text-secondary)">All Hebrew content</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--font-mono</td><td style="font-family:var(--font-mono);font-size:11px">'JetBrains Mono'</td><td style="font-size:12px;color:var(--text-secondary)">Code, IDs, hex, metadata</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">--radius-lg</td><td style="font-family:var(--font-mono);font-size:11px">12px</td><td style="font-size:12px;color:var(--text-secondary)">Cards, major containers</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">transition</td><td style="font-family:var(--font-mono);font-size:11px">all 0.2s ease</td><td style="font-size:12px;color:var(--text-secondary)">Standard hover transition</td></tr>
+        <tr><td style="font-family:var(--font-mono);font-size:11px;color:var(--teal)">Brand name</td><td style="font-family:var(--font-mono);font-size:11px">t.Co.</td><td style="font-size:12px;color:var(--text-secondary)">Always bold, both periods, lowercase t, uppercase C</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="site-footer__left" id="footer-left">David Castiel · M.Design in Design for Technological Environments<br>HIT Holon Institute of Technology · Submission: August 4, 2026</div>
+  <div class="site-footer__right">t.Co. · Design System · v1.0 · 2026</div>
+</footer>
+
+<script>
+const root=document.documentElement,mq=window.matchMedia('(prefers-color-scheme:dark)');
+let cur=localStorage.getItem('tco-theme')||'dark';
+function applyTheme(t){root.setAttribute('data-theme',t==='system'?(mq.matches?'dark':'light'):t);['light','system','dark'].forEach(x=>document.getElementById('btn-'+x).classList.toggle('active',x===t));cur=t;localStorage.setItem('tco-theme',t);}
+function setTheme(t){applyTheme(t);}
+mq.addEventListener('change',()=>{if(cur==='system')applyTheme('system');});
+applyTheme(cur);
+
+const LKEY='tco-lang';let cl=localStorage.getItem(LKEY)||'en';
+const FHE='דוד קסטיאל · תואר שני בעיצוב לסביבה טכנולוגית<br>מכון טכנולוגי חולון HIT · הגשה: 4 אוגוסט 2026';
+const FEN='David Castiel · M.Design in Design for Technological Environments<br>HIT Holon Institute of Technology · Submission: August 4, 2026';
+function applyLang(l,save=true){root.lang=l;root.dir=l==='he'?'rtl':'ltr';document.querySelectorAll('[data-he][data-en]').forEach(el=>{el.textContent=el.dataset[l];});document.getElementById('footer-left').innerHTML=l==='he'?FHE:FEN;document.getElementById('btn-he').classList.toggle('active',l==='he');document.getElementById('btn-en').classList.toggle('active',l==='en');cl=l;if(save)localStorage.setItem(LKEY,l);}
+function setLang(l){applyLang(l);}
+applyLang(cl,false);
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'});});});
+</script>
 </body>
 </html>
