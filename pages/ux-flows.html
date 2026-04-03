@@ -9,8 +9,18 @@
   <style>
     .doc-section { max-width: 1100px; margin: 0 auto; padding: 64px 40px; border-bottom: 1px solid var(--border); }
     .doc-section:last-of-type { border-bottom: none; }
-    .diagram-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; margin: 28px 0; overflow-x: auto; }
-    .diagram-wrap svg { display: block; margin: 0 auto; }
+    .diagram-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 16px;
+      margin: 28px 0;
+      overflow-x: auto;
+      overflow-y: visible;
+      direction: ltr; /* always scroll left→right regardless of page language */
+      -webkit-overflow-scrolling: touch;
+    }
+    .diagram-wrap svg { display: block; margin: 0 auto; min-width: 700px; }
     .lang-toggle { display:flex; gap:2px; margin-right:8px; border-right:1px solid var(--border); padding-right:10px; }
     .lang-btn { padding:4px 11px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--text-secondary); font-family:var(--font-latin); font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s; }
     .lang-btn:hover { border-color:var(--gold); color:var(--gold); }
@@ -19,7 +29,12 @@
     .legend-item { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-secondary); font-family:var(--font-latin); }
     .legend-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
     @media (max-width:768px) { .doc-section { padding:40px 20px; } }
-  </style>
+  
+  /* Mobile scroll for all tables */
+  .ph-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Prevent horizontal overflow on small screens */
+  body { overflow-x: hidden; }
+</style>
 </head>
 <body>
 
@@ -179,7 +194,8 @@
 
     <!-- Persona comparison table -->
     <div style="margin-top:28px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">
-      <table class="tco-table" style="margin:0">
+      <div class="tco-table-wrap">
+<table class="tco-table" style="margin:0">
         <thead>
           <tr>
             <th></th>
@@ -197,6 +213,7 @@
           <tr><td style="color:var(--text-muted);font-size:11px">Retention driver</td><td>Personalized discovery</td><td>Flexibility &amp; language</td><td>Loyalty optimization</td></tr>
         </tbody>
       </table>
+</div>
     </div>
   </div>
 
