@@ -236,6 +236,9 @@ pre {
   align-items: center;
   list-style: none;
 }
+/* RTL: reverse nav so primary items (Home/בית) appear on the right */
+[lang="he"] .site-nav { flex-direction: row-reverse; }
+[lang="en"] .site-nav { flex-direction: row; }
 .site-nav a { font-size: 13px; color: var(--text-secondary); font-weight: 400; transition: color 0.2s; }
 .site-nav a:hover, .site-nav a.active { color: var(--text-primary); opacity: 1; }
 
