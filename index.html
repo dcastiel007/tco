@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he" data-theme="system">
+<html lang="he" dir="rtl" data-theme="system">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,7 +25,7 @@
       color: var(--navy);
       margin-bottom: 16px;
     }
-    .hero__title em { color: var(--crimson); font-style: italic; }
+    .hero__title em { color: var(--gold); font-style: italic; }
     .hero__sub {
       font-family: var(--font-hebrew);
       font-size: 1rem;
@@ -82,32 +82,53 @@
       .hero__title { font-size: 2rem; }
       .hero__visual { display: none; }
     }
-  </style>
+  
+  /* ── Language toggle ─────────────────────────────────────────────────── */
+  .lang-toggle {
+    display: flex; gap: 2px;
+    margin-right: 8px;
+    border-right: 1px solid var(--border);
+    padding-right: 10px;
+  }
+  .lang-btn {
+    padding: 4px 11px; border-radius: 20px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text-secondary); font-family: var(--font-latin);
+    font-size: 11px; font-weight: 500; cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .lang-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .lang-btn.active { background: var(--gold); border-color: var(--gold); color: #0A0A0F; }
+</style>
   <meta name="version" content="v1.0">
 </head>
 <body>
 
   <!-- Theme bar -->
-  <div class="theme-bar">
-    <span class="theme-bar__label">ערכת נושא</span>
-    <button class="theme-btn" onclick="setTheme('light')"  id="btn-light">☀ בהיר</button>
-    <button class="theme-btn" onclick="setTheme('system')" id="btn-system">⊙ מערכת</button>
-    <button class="theme-btn" onclick="setTheme('dark')"   id="btn-dark">● כהה</button>
+    <div class="theme-bar">
+    <span class="theme-bar__label"><span data-he="ערכת נושא" data-en="Theme">ערכת נושא</span></span>
+    <button class="theme-btn" onclick="setTheme('light')"  id="btn-light">☀ <span data-he="בהיר" data-en="Light">בהיר</span></button>
+    <button class="theme-btn" onclick="setTheme('system')" id="btn-system">⊙ <span data-he="מערכת" data-en="System">מערכת</span></button>
+    <button class="theme-btn" onclick="setTheme('dark')"   id="btn-dark">● <span data-he="כהה" data-en="Dark">כהה</span></button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-he" onclick="setLang('he')">עב</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
   </div>
 
   <!-- Header -->
   <header class="site-header">
     <div>
       <div class="site-logo">t.Co.</div>
-      <div class="site-tagline">Personal AI Travel Concierge</div>
+      <div class="site-tagline" data-he="קונסיירז׳ נסיעות AI אישי" data-en="Personal AI Travel Concierge">קונסיירז׳ נסיעות AI אישי</div>
     </div>
     <nav>
-            <ul class="site-nav">
-        <li><a href="index.html" class="active">בית</a></li>
-        <li><a href="pages/project-plan.html">תכנית הפרויקט</a></li>
-        <li><a href="pages/agents.html">ארכיטקטורה</a></li>
-        <li><a href="pages/design-system.html">Design System</a></li>
-        <li><a href="pages/exhibition.html">תערוכה</a></li>
+                  <ul class="site-nav">
+        <li><a href="index.html" class="active" data-he="בית" data-en="Home">בית</a></li>
+        <li><a href="pages/project-plan.html" data-he="תכנית הפרויקט" data-en="Project Plan">תכנית הפרויקט</a></li>
+        <li><a href="pages/agents.html" data-he="ארכיטקטורה" data-en="Architecture">ארכיטקטורה</a></li>
+        <li><a href="pages/design-system.html" data-he="Design System" data-en="Design System">Design System</a></li>
+        <li><a href="pages/exhibition.html" data-he="תערוכה" data-en="Exhibition">תערוכה</a></li>
       </ul>
     </nav>
   </header>
@@ -201,8 +222,8 @@
         </div>
 
         <div class="card">
-          <div class="card__icon" style="background:var(--crimson-dim)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--crimson)" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div class="card__icon" style="background:var(--gold-dim)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <p class="card__title">AGT-06 · שפה ותרבות</p>
           <p class="card__body">תרגום חי, טיפים לאתיקטה ומדריכי הגייה בזמן אמת.</p>
