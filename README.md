@@ -3,6 +3,8 @@
 > פרויקט גמר לתואר שני בעיצוב לסביבה טכנולוגית  
 > דוד קסטיאל | מכון טכנולוגי חולון HIT | תערוכה: 6–19 אוגוסט 2026
 
+🌐 **Live site:** https://tico.mytico.me
+
 ---
 
 ## מבנה ה-repo
@@ -10,35 +12,53 @@
 ```
 tco-project/
 │
-├── index.html                      ← דף הבית
+├── index.html                          ← דף הבית — hero, timeline, טבלת תוצרים
 │
 ├── pages/
-│   ├── project-plan.html           ← תכנית הפרויקט האינטראקטיבית
-│   ├── agents.html                 ← דיאגרמת הסוכנים
-│   ├── design-system.html          ← עמוד Design System
-│   └── exhibition.html             ← מידע על התערוכה
+│   ├── agents.html                     ← ארכיטקטורה — 11 סוכנים, stack, תרשים
+│   ├── project-plan.html               ← תכנית פרויקט — Gantt chart, 7 פאזות
+│   ├── ux-flows.html                   ← UX Flows — Personas, Journey, Flows, IA
+│   ├── design-system.html              ← Brand Identity & Design System
+│   ├── onboarding.html                 ← Onboarding Dialogue Flows + prototype חי
+│   ├── exhibition.html                 ← מידע על התערוכה
+│   └── _template.html                  ← תבנית לדפים חדשים
 │
 ├── assets/
 │   ├── css/
-│   │   └── tco-design.css          ← Design System — כל הצבעים, גופנים, קומפוננטות
-│   ├── fonts/                      ← גופנים self-hosted (אופציונלי)
-│   └── icons/                      ← SVG icons
+│   │   └── tco-design.css             ← Design System מרכזי
+│   └── icons/
+│       ├── tco-mark.svg               ← Globe Mark — סמל גרפי
+│       └── tco-wordmark.svg           ← Horizontal lockup
 │
 ├── docs/
-│   ├── tco_project_book_v2.pdf     ← ספר הפרויקט
-│   └── tco_project_plan.xlsx       ← קובץ תכנון הפרויקט
-│
-├── deliverables/                   ← כל תוצר שנבנה בפרויקט
-│   └── YYYY-MM-DD_deliverable.html ← שם קובץ = תאריך + תיאור
+│   ├── tco_architecture_v2.0.pdf/docx  ← מסמך ארכיטקטורה
+│   ├── tco_project_book_v2.0.pdf       ← ספר הפרויקט האקדמי
+│   ├── tco_ux-flows_v1.0.pdf/docx      ← UX Flows + Personas
+│   ├── tco_design-system_v1.0.pdf/docx ← Brand Identity & Design System
+│   ├── tco_onboarding_v1.0.pdf/docx    ← Onboarding Dialogue Flows
+│   └── ticoprojectplanv1.xlsx          ← קובץ תכנון הפרויקט
 │
 └── README.md
 ```
 
 ---
 
+## תוצרים
+
+| תוצר | פורמטים | גרסה |
+|------|----------|-------|
+| ארכיטקטורת המערכת | HTML · PDF · DOCX | v2.0 |
+| ספר הפרויקט | PDF | v2.0 |
+| UX Flows + Personas | HTML · PDF · DOCX | v1.0 |
+| Brand Identity & Design System | HTML · PDF · DOCX | v1.0 |
+| Onboarding Dialogue Flows | HTML · PDF · DOCX | v1.0 |
+| תכנית פרויקט (Gantt) | HTML · XLSX | v1.0 |
+
+---
+
 ## Design System
 
-כל דף HTML בפרויקט מייבא:
+כל דף HTML מייבא את מערכת העיצוב:
 
 ```html
 <link rel="stylesheet" href="../assets/css/tco-design.css">
@@ -48,53 +68,39 @@ tco-project/
 
 | שם | Hex | שימוש |
 |---|---|---|
-| Navy | `#0B1D3A` | כותרות, רקע header |
-| Blue Mid | `#1A3F72` | כותרות מקטע |
-| Blue Soft | `#2E6AAF` | קווים, borders |
-| Blue Pale | `#E8F0FA` | שורות לסירוגין |
-| Crimson | `#C0272D` | accent, labels |
+| Background | `#0A0A0F` | רקע דף (dark mode) |
+| Surface | `#13131A` | header, footer |
+| Card | `#1C2230` | כרטיסים |
+| **Gold** | `#C8A96E` | accent ראשי, לוגו, CTAs |
+| Teal | `#4ECDC4` | אינטראקטיבי, AI indicators |
+| Purple | `#7C6FCD` | Design status |
 
 ### גופנים
 
-- **Latin / UI:** Poppins (Light · Regular · Medium · Bold)
-- **עברית:** Noto Sans Hebrew (Light · SemiBold)
+- **Latin / UI:** Poppins (300 · 400 · 500 · 700)
+- **עברית:** Noto Sans Hebrew (300 · 600)
 - **Mono:** JetBrains Mono
 
-### ערכות נושא
+---
 
-כל דף תומך ב-3 ערכות: `light` / `dark` / `system`.  
-הבחירה נשמרת ב-`localStorage` תחת המפתח `tco-theme`.
+## ארכיטקטורת המערכת
+
+11 סוכני AI מתמחים בארבעה שלבי נסיעה:
+
+| שלב | סוכנים |
+|------|--------|
+| Before Trip | AGT-01 Profiling · AGT-02 Itinerary · AGT-03 Booking |
+| During Trip | AGT-04 Location · AGT-05 Schedule · AGT-06 Language |
+| Post Trip | AGT-07 Memory · AGT-08 Feedback |
+| Long-Term | AGT-09 Loyalty · AGT-10 Analytics · AGT-11 Anticipation |
+
+**Stack:** LangGraph · Claude AI · RAG · ChromaDB · FastAPI · React
 
 ---
 
-## הוספת תוצר חדש
+## הגשה
 
-1. צור קובץ ב-`deliverables/` בפורמט `YYYY-MM-DD_שם-תוצר.html`
-2. בראש הקובץ הוסף:
-   ```html
-   <link rel="stylesheet" href="../assets/css/tco-design.css">
-   ```
-3. הוסף שורה לטבלת התוצרים ב-`index.html`
-4. העלה ל-repo
-
----
-
-## GitHub Pages
-
-האתר מתפרסם אוטומטית מה-branch `main`.  
-כתובת: `https://[username].github.io/[repo-name]/`
-
-להפעלה: **Settings → Pages → Source: main / root**
-
----
-
-## פרטי הפרויקט
-
-| | |
-|---|---|
-| **שם** | t.Co. — Personal AI Travel Concierge |
-| **סטודנט** | דוד קסטיאל |
-| **מוסד** | מכון טכנולוגי חולון HIT |
-| **תואר** | M.Design בעיצוב לסביבה טכנולוגית |
-| **הגשה** | 4 אוגוסט 2026 |
-| **תערוכה** | 6–19 אוגוסט 2026 |
+- **תאריך הגשה:** 4 אוגוסט 2026  
+- **תערוכה:** 6–19 אוגוסט 2026  
+- **מוסד:** HIT — המכון הטכנולוגי חולון  
+- **תואר:** M.Design — Design for Technological Environments
