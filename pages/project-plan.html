@@ -71,6 +71,11 @@
   }
   .lang-btn:hover { border-color: var(--gold); color: var(--gold); }
   .lang-btn.active { background: var(--gold); border-color: var(--gold); color: #0A0A0F; }
+
+  /* Mobile scroll for all tables */
+  .ph-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Prevent horizontal overflow on small screens */
+  body { overflow-x: hidden; }
 </style>
   <meta name="version" content="v1.0">
 </head>
@@ -259,7 +264,8 @@ phases.forEach(p=>{
       <span class="ph-name">${p.name}</span>
       <span class="ph-dates">${p.start.slice(5)} → ${p.end.slice(5)} · ${p.dur}</span>
     </div>
-    <table class="ph-table">
+    <div class="ph-table-wrap">
+<table class="ph-table">
       <thead><tr>
         <th style="width:32px;text-align:center">#</th>
         <th>משימה</th><th>סטטוס</th>
@@ -279,7 +285,8 @@ phases.forEach(p=>{
           <td class="t-notes">${t.note}</td>
         </tr>`;
       }).join('')}</tbody>
-    </table>`;
+    </table>
+</div>`;
   tt.appendChild(sec);
 });
 </script>

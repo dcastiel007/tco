@@ -109,9 +109,34 @@ body {
 }
 
 [lang="he"], .rtl, [dir="rtl"] {
-  font-family: var(--font-hebrew);
   direction: rtl;
+}
+
+/* Hebrew font only on Hebrew-language text elements */
+[lang="he"] [data-he],
+[lang="he"] .site-tagline,
+[lang="he"] .site-footer__left {
+  font-family: var(--font-hebrew);
   text-align: right;
+}
+
+/* English/Latin content always stays left-aligned regardless of page language */
+[lang="he"] p,
+[lang="he"] li,
+[lang="he"] .card__body,
+[lang="he"] .mc-desc,
+[lang="he"] .mc-example,
+[lang="he"] .voice-desc,
+[lang="he"] .voice-eg,
+[lang="he"] .voice-no,
+[lang="he"] .rule-it,
+[lang="he"] .type-specimen,
+[lang="he"] .diagram-wrap,
+[lang="he"] .q-table,
+[lang="he"] [style*="font-family:var(--font-latin)"],
+[lang="he"] [style*="font-family: var(--font-latin)"] {
+  text-align: left;
+  font-family: var(--font-latin);
 }
 
 /* ── Typography ──────────────────────────────────────────────────────────── */

@@ -34,6 +34,17 @@
   .ph-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   /* Prevent horizontal overflow on small screens */
   body { overflow-x: hidden; }
+    /* Force SVG diagram text to be readable in both light/dark modes */
+    .diagram-wrap { background: var(--card) !important; }
+    [data-theme="light"] .diagram-wrap,
+    [data-theme="system"] .diagram-wrap {
+      background: #1C2230 !important;
+      border-color: #2A3245 !important;
+    }
+    /* Ensure section labels stay readable */
+    [lang="he"] .section-label { text-align: right; font-family: var(--font-latin); }
+    [lang="he"] h2 { text-align: right; }
+    [lang="he"] .doc-section > p { text-align: left; }
 </style>
 </head>
 <body>
